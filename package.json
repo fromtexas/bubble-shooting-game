@@ -1,0 +1,49 @@
+{
+  "name": "webpack4-boilerplate",
+  "version": "1.0.0",
+  "description": "Webpack3 boilerplate with Babel and SCSS",
+  "author": "Oleg Veskelen",
+  "license": "MIT",
+  "homepage": "https://github.com/fromtexas/webpack3-boilerplate",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=dev webpack-dev-server --progress --config webpack.config.dev.js",
+    "build": "webpack -p --progress --config webpack.config.prod.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fromtexas/webpack3-boilerplate"
+  },
+  "dependencies": {
+    "hoek": "^5.0.3",
+    "lodash": "^4.17.5"
+  },
+  "devDependencies": {
+    "autoprefixer": "^7.2.6",
+    "babel-cli": "6.24.1",
+    "babel-core": "6.25.0",
+    "babel-loader": "7.1.1",
+    "babel-plugin-transform-react-constant-elements": "6.23.0",
+    "babel-plugin-transform-react-remove-prop-types": "0.4.6",
+    "babel-polyfill": "6.23.0",
+    "babel-preset-env": "1.6.0",
+    "babel-preset-react": "6.24.1",
+    "babel-preset-stage-1": "6.24.1",
+    "clean-webpack-plugin": "^0.1.19",
+    "cross-env": "^5.1.3",
+    "css-loader": "^0.28.10",
+    "ejs-loader": "^0.3.1",
+    "extract-text-webpack-plugin": "4.0.0-beta.0",
+    "file-loader": "^1.1.11",
+    "html-webpack-plugin": "3.2.0",
+    "node-sass": "^4.9.2",
+    "postcss-loader": "^2.1.1",
+    "sass-loader": "^6.0.7",
+    "style-loader": "^0.19.1",
+    "uglifyjs-webpack-plugin": "^1.2.2",
+    "url-loader": "^0.6.2",
+    "webpack": "^4.16.1",
+    "webpack-cli": "^2.0.9",
+    "webpack-dev-server": "^3.1.5",
+    "webpack-md5-hash": "0.0.6"
+  }
+}

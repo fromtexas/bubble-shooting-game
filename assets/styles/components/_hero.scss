@@ -1,0 +1,34 @@
+.base {
+    border-radius: 5px;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    left: 380px;
+    top: 280px;
+    background-color: $red;
+    color: $white;
+    margin: auto;
+}
+
+.box {
+    transform: rotate(-130deg);
+    position: absolute;
+    left: 385px;
+    top: 285px;
+    border: 1px solid $black;
+    width: 30px;
+    height: 30px;
+    background-color: $dark-blue;
+    transition: all 0.1s ease-in-out;
+}
+
+.turret{
+    position: absolute;
+    height:100%;
+    width:40%;
+    margin-left: 30%;
+    bottom:35%;
+    border-radius:  5px;
+    background-color: $white;
+    z-index: 10;
+}

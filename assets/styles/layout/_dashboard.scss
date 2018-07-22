@@ -1,0 +1,8 @@
+.dashboard{
+    font-size: 2rem;
+    padding: 2.5rem;
+    color: $white;
+    display: grid;
+    align-items: center;
+    grid-template-columns: [score-start] minmax(min-content, 20rem) [score-end progress-start] 1fr [progress-end];
+}
