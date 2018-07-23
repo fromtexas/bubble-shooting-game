@@ -3,18 +3,20 @@
     position: absolute;
     width: 40px;
     height: 40px;
-    left: 380px;
-    top: 280px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     background-color: $red;
     color: $white;
     margin: auto;
 }
 
 .box {
-    transform: rotate(-130deg);
+    //transform: rotate(-130deg);
     position: absolute;
-    left: 385px;
-    top: 285px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(-130deg);
     border: 1px solid $black;
     width: 30px;
     height: 30px;
