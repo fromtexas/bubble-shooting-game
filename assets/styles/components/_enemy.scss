@@ -1,0 +1,8 @@
+.enemy{
+    position: absolute;
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba($white,.3), rgba($red, .5) );
+    box-shadow: 0 0 1rem 0 rgba($red,.1);
+}
