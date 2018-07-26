@@ -3,7 +3,7 @@ import {bullet} from './view/bullet';
 
 const {box, gameContainer} = elements;
 
-function isCollide(ele1, ele2){
+export function isCollide(ele1, ele2){
     const ele1Rect = ele1.getBoundingClientRect();
     const ele2Rect = ele2.getBoundingClientRect();
     return !(
@@ -39,20 +39,7 @@ export function shoot (e, boxCenter) {
     gameContainer.appendChild(bulletInst);
 };
 
-export function moveBullets () {
-    let tempBullets = document.querySelectorAll('.bullet');
-    if(tempBullets){
-        [...tempBullets].forEach(item => {
-            if(item.offsetTop > gameContainer.clientHeight || item.offsetTop < 0 || item.offsetLeft > gameContainer.clientWidth || item.offsetLeft < 0){
-                item.parentNode.removeChild(item);
-            }
-            else {
-                item.style.top = item.offsetTop + item.movery + 'px';
-                item.style.left = item.offsetLeft + item.moverx + 'px';
-            }
-        });
-    } 
-};
+
 
  
 

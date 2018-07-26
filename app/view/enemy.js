@@ -1,6 +1,15 @@
 import {elements} from '../base';
+import {isCollide} from '../math';
 
-const {gameContainer} = elements;
+const {gameContainer, box, base} = elements;
+const enemiesColors = ['#b84dd4', '	#a32dd8', '#3b96fd', '#43c59b', '#f98f6b'];
+const whiteColor = 'rgba(255, 255, 255, .3);'
+
+//hex to rgba will be here later 
+
+function enemyShadow (color){
+    return `0 0 1rem 0 ${color}`;
+};
 
 export function setupEnemies (num) {
     for(let i = 0; i < num; i++){
@@ -56,8 +65,9 @@ function randomMe (num){
     return Math.floor(Math.random()*num);
 }
 
-export function moveEnemies () {
+export function moveEnemies (player) {
     const tempEnemies = document.querySelectorAll('.enemy');
+    let hitter = false;
     [...tempEnemies].forEach(item => {
         if(item.offsetTop > gameContainer.clientHeight || item.offsetTop < 0 || item.offsetLeft > gameContainer.clientWidth || item.offsetLeft < 0){
             item.parentNode.removeChild(item);
@@ -67,5 +77,28 @@ export function moveEnemies () {
             item.style.top = item.offsetTop + item.movery + 'px';
             item.style.left = item.offsetLeft + item.moverx + 'px';
         }
+
+        if(isCollide(box, item)){
+            hitter = true;
+            player.decreaseLives();
+            //console.log(player.lives, hitter);
+        }
+
+        if(!hitter){
+            base.style.backgroundColor = '#FA676B';
+            hitter = false;
+        }
+        else{
+            base.style.backgroundColor = '#7b0003';
+        }
     });
-}
+};
+
+
+//not nessery. replace it and clearBullets later with one utility function
+export function clearEnemies () {
+    const tempEnemies = document.querySelectorAll('.enemy');
+    [...tempEnemies].forEach(item => {
+        item.parentNode.removeChild(item);
+    });
+};

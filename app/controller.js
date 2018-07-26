@@ -1,9 +1,13 @@
 import {elements} from './base';
 
 import {toggle} from './view/modal';
-import {setupEnemies, moveEnemies} from './view/enemy';
+import {setupEnemies, moveEnemies, clearEnemies} from './view/enemy';
+import {updateProgress, updateScore} from './view/player';
+import {moveBullets, clearBullets} from './view/bullet';
 
-import {moveBullets, movePosition, shoot} from './math';
+import {movePosition, shoot} from './math';
+
+import {Player} from './model/player';
 
 
 function tempDev () {
@@ -20,16 +24,31 @@ function tempDev () {
     
     startBtn.addEventListener('click', () => {
         state.gameStatus = true;
+        state.player = new Player();
         toggle(state.gameStatus, gameover);
         setupEnemies(10)
         play();
     });
+
+    function gameOver () {
+        cancelAnimationFrame(play);
+        state.gameStatus = false;
+        toggle(state.gameStatus, gameover, state.player.score);
+        clearEnemies();
+        clearBullets();
+    }
     
     function play () {
         if(state.gameStatus){
             moveBullets();
-            moveEnemies();
+            moveEnemies(state.player);
+            updateProgress(state.player.lives, state.player.barWidth);
+            updateScore(state.player.score);
             requestAnimationFrame(play)
+
+            if(state.player.lives < 0){
+                gameOver();
+            }
         }
     };
 };
