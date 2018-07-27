@@ -29,13 +29,13 @@ export function movePosition (e, box, boxCenter) {
 };
 
 export function shoot (e, boxCenter) {
-    //console.log('boom');
     const deg = getDeg(e, boxCenter);
     const bulletInst = bullet();
-    bulletInst.moverx = 5 * Math.sin(degRad(deg));
-    bulletInst.movery = -5 * Math.cos(degRad(deg));
-    bulletInst.style.left = (boxCenter[0]-20) + 'px';
-    bulletInst.style.top = (boxCenter[1]-20)+ 'px';
+    bulletInst.moverx = 10 * Math.sin(degRad(deg));
+    bulletInst.movery = -10 * Math.cos(degRad(deg));
+    bulletInst.style.left = '50%';
+    bulletInst.style.top = '50%';
+    bulletInst.style.transform =  'translate(-50%, -50%)';
     gameContainer.appendChild(bulletInst);
 };
 

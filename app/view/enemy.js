@@ -2,14 +2,17 @@ import {elements} from '../base';
 import {isCollide} from '../math';
 
 const {gameContainer, box, base} = elements;
-const enemiesColors = ['#b84dd4', '	#a32dd8', '#3b96fd', '#43c59b', '#f98f6b'];
-const whiteColor = 'rgba(255, 255, 255, .3);'
 
-//hex to rgba will be here later 
 
-function enemyShadow (color){
-    return `0 0 1rem 0 ${color}`;
+function randomColor() {
+    return `radial-gradient(circle, rgba(255, 255, 255, 0.3) ,rgba(${randomMe(255)}, ${randomMe(255)}, ${randomMe(255)}, 0.5))`;
+}
+
+function enemyShadow (){
+    return `0 0 1rem 0 rgba(${randomMe(255)}, ${randomMe(255)}, ${randomMe(255)}, 0.3)`;
 };
+
+
 
 export function setupEnemies (num) {
     for(let i = 0; i < num; i++){
@@ -17,12 +20,12 @@ export function setupEnemies (num) {
     }
 };
 
-function enemyMaker () {
+function enemyMaker () { //would be better  move it to class as bullet
     const enemy = document.createElement('div');
     let x,y,xmove,ymove;
     let randomStartPos = randomMe(4);
-    let dirSet = randomMe(5) + 2;
-    let dirPos = randomMe(7) - 3;
+    let dirSet = randomMe(9) + 2;
+    let dirPos = randomMe(13) - 3;
     switch (randomStartPos) {
         case 0:
             x = 0;
@@ -55,10 +58,14 @@ function enemyMaker () {
     enemy.setAttribute('class', 'enemy');
     enemy.style.left = x + 'px';
     enemy.style.top = y + 'px';
+    enemy.style.boxShadow = enemyShadow();
+    enemy.style.background = randomColor();
+    enemy.style.width = randomMe(6) + 6 + 'rem';
+    enemy.style.height = enemy.style.width;
+    enemy.score = randomMe(10) + 1 * parseInt(enemy.style.width);
     enemy.moverx = xmove;
     enemy.movery = ymove;
     gameContainer.appendChild(enemy);
-    //return enemy;
 };
 
 function randomMe (num){
@@ -81,7 +88,6 @@ export function moveEnemies (player) {
         if(isCollide(box, item)){
             hitter = true;
             player.decreaseLives();
-            //console.log(player.lives, hitter);
         }
 
         if(!hitter){
@@ -101,4 +107,23 @@ export function clearEnemies () {
     [...tempEnemies].forEach(item => {
         item.parentNode.removeChild(item);
     });
+};
+
+export function hitDetection(updateScore){
+    const enemies = document.querySelectorAll('.enemy');
+    const bullets = document.querySelectorAll('.bullet');
+
+    if(enemies.length && bullets.length){
+        [...enemies].forEach(enemy => {
+            for(let bullet of bullets){
+                if(isCollide(enemy, bullet)){
+                    updateScore(enemy.score);
+                    enemy.parentNode.removeChild(enemy);
+                    bullet.parentNode.removeChild(bullet);
+                    enemyMaker();
+                    break;
+                }
+            }
+        });
+    }
 };

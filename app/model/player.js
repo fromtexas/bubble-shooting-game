@@ -8,4 +8,9 @@ export class Player {
     decreaseLives () {
         this.lives--;
     }
+
+    updateScore (score) {
+        this.score += score;
+        //console.log(this.score);
+    }
 }
