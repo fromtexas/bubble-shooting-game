@@ -6,6 +6,7 @@ export const elements = {
     base: document.querySelector('.base'),
     score: document.querySelector('.score'),
     progressBar: document.querySelector('.progress__bar'),
+    round: document.querySelector('.round'),
 };
 
 

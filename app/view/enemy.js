@@ -37,7 +37,7 @@ function enemyMaker (enemyObj) {
     gameContainer.appendChild(enemy);
 };
 
-export function moveEnemies (player, Enemy) {
+export function moveEnemies (player, Enemy, stage) {
     const tempEnemies = document.querySelectorAll('.enemy');
     let hitter = false;
     [...tempEnemies].forEach(item => {
@@ -46,8 +46,8 @@ export function moveEnemies (player, Enemy) {
             enemyMaker(new Enemy);
         }
         else{
-            item.style.top = item.offsetTop + item.movery + 'px';
-            item.style.left = item.offsetLeft + item.moverx + 'px';
+            item.style.top = stage - 1 + item.offsetTop + item.movery + 'px';
+            item.style.left = stage - 1 + item.offsetLeft + item.moverx + 'px';
         }
 
         if(isCollide(box, item)){

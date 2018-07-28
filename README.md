@@ -1,10 +1,12 @@
-Webpack 4 boilerplate
-===========
-Webpack3 boilerplate with Babel, SCSS, lodash.
+# Bubble shooting game
+
+> Native JavaScript shooting game -> [Preview](http://extra-small-company.surge.sh/)
+  
+![Bubble shooting game](https://image.ibb.co/euR53o/bubbles.png)
 
 ##  EZ Setup
-1. `git clone git@github.com:fromtexas/webpack4-boilerplate.git`
-2. `cd webpack4-boilerplate`
+1. `git clone git@github.com:fromtexas/bubble-shooting-game.git`
+2. `cd bubble-shooting-game`
 3. `npm install`
 
 ## Development

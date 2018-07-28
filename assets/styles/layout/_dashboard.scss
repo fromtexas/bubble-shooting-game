@@ -4,5 +4,6 @@
     color: $white;
     display: grid;
     align-items: center;
-    grid-template-columns: [score-start] minmax(min-content, 20rem) [score-end progress-start] 1fr [progress-end];
+    grid-template-columns: [score-start] minmax(min-content, 20rem) [score-end round-start] minmax(min-content, 20rem) [round-end progress-start] 1fr [progress-end];
+    text-shadow: 0.4rem 0.7rem 1rem #000;
 }
