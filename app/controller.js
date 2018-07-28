@@ -1,13 +1,16 @@
-import {elements} from './base';
+import {elements, clearDom} from './base';
 
 import {toggle} from './view/modal';
-import {setupEnemies, moveEnemies, clearEnemies, hitDetection} from './view/enemy';
+import {setupEnemies, moveEnemies, hitDetection} from './view/enemy';
 import {updateProgress, updateScore} from './view/player';
-import {moveBullets, clearBullets} from './view/bullet';
+import {moveBullets} from './view/bullet';
+import {updCount, clearCounter, setCounter} from './view/count';
 
 import {movePosition, shoot} from './math';
 
 import {Player} from './model/player';
+import {Enemy} from './model/enemy';
+import {Count} from './model/count';
 
 
 function tempDev () {
@@ -25,27 +28,31 @@ function tempDev () {
     startBtn.addEventListener('click', () => {
         state.gameStatus = true;
         state.player = new Player();
-        
+        state.count = new Count(4, 0);
         toggle(state.gameStatus, gameover);
-        setupEnemies(20);
-        play();
+        setCounter();
+        state.count.countDown(updCount).then(() =>{
+            clearCounter();
+            setupEnemies(20, Enemy);
+            play();
+        });    
     });
 
     function gameOver () {
         cancelAnimationFrame(play);
         state.gameStatus = false;
         toggle(state.gameStatus, gameover, state.player.score);
-        clearEnemies();
-        clearBullets();
+        clearDom('.bullet');
+        clearDom('.enemy');
     }
     
     function play () {
         if(state.gameStatus){
             moveBullets();
-            moveEnemies(state.player);
+            moveEnemies(state.player, Enemy);
             updateProgress(state.player.lives, state.player.barWidth);
-            hitDetection(state.player.updateScore.bind(state.player));
-            updateScore(state.player.score);
+            hitDetection(state.player.updateScore.bind(state.player), Enemy);
+            updateScore(state.player.score, Enemy);
 
             requestAnimationFrame(play);
             if(state.player.lives < 0){

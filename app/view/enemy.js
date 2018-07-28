@@ -1,5 +1,6 @@
-import {elements} from '../base';
+import {elements, randomMe} from '../base';
 import {isCollide} from '../math';
+
 
 const {gameContainer, box, base} = elements;
 
@@ -14,71 +15,35 @@ function enemyShadow (){
 
 
 
-export function setupEnemies (num) {
+export function setupEnemies (num, Enemy) {
     for(let i = 0; i < num; i++){
-        enemyMaker();
+        enemyMaker(new Enemy);
     }
 };
 
-function enemyMaker () { //would be better  move it to class as bullet
+function enemyMaker (enemyObj) {
+    enemyObj.setStartPos(); 
     const enemy = document.createElement('div');
-    let x,y,xmove,ymove;
-    let randomStartPos = randomMe(4);
-    let dirSet = randomMe(9) + 2;
-    let dirPos = randomMe(13) - 3;
-    switch (randomStartPos) {
-        case 0:
-            x = 0;
-            y = randomMe(gameContainer.clientHeight);
-            xmove = dirSet;
-            ymove = dirPos;
-        break;
-
-        case 1:
-            x = gameContainer.clientWidth;
-            y = randomMe(gameContainer.clientHeight);
-            xmove = dirSet * -1;
-            ymove = dirPos;
-        break;
-
-        case 2:
-            x = randomMe(gameContainer.clientWidth);
-            y = 0;
-            xmove = dirPos;
-            ymove = dirSet;
-        break;
-
-        case 3:
-            x = randomMe(gameContainer.clientWidth);
-            y = gameContainer.clientHeight;
-            xmove = dirPos;
-            ymove = dirSet * -1;
-        break;
-    }
     enemy.setAttribute('class', 'enemy');
-    enemy.style.left = x + 'px';
-    enemy.style.top = y + 'px';
+    enemy.style.left = enemyObj.x + 'px';
+    enemy.style.top = enemyObj.y + 'px';
     enemy.style.boxShadow = enemyShadow();
     enemy.style.background = randomColor();
     enemy.style.width = randomMe(6) + 6 + 'rem';
     enemy.style.height = enemy.style.width;
     enemy.score = randomMe(10) + 1 * parseInt(enemy.style.width);
-    enemy.moverx = xmove;
-    enemy.movery = ymove;
+    enemy.moverx = enemyObj.xmove;
+    enemy.movery = enemyObj.ymove;
     gameContainer.appendChild(enemy);
 };
 
-function randomMe (num){
-    return Math.floor(Math.random()*num);
-}
-
-export function moveEnemies (player) {
+export function moveEnemies (player, Enemy) {
     const tempEnemies = document.querySelectorAll('.enemy');
     let hitter = false;
     [...tempEnemies].forEach(item => {
         if(item.offsetTop > gameContainer.clientHeight || item.offsetTop < 0 || item.offsetLeft > gameContainer.clientWidth || item.offsetLeft < 0){
             item.parentNode.removeChild(item);
-            enemyMaker();
+            enemyMaker(new Enemy);
         }
         else{
             item.style.top = item.offsetTop + item.movery + 'px';
@@ -101,15 +66,8 @@ export function moveEnemies (player) {
 };
 
 
-//not nessery. replace it and clearBullets later with one utility function
-export function clearEnemies () {
-    const tempEnemies = document.querySelectorAll('.enemy');
-    [...tempEnemies].forEach(item => {
-        item.parentNode.removeChild(item);
-    });
-};
 
-export function hitDetection(updateScore){
+export function hitDetection(updateScore, Enemy){
     const enemies = document.querySelectorAll('.enemy');
     const bullets = document.querySelectorAll('.bullet');
 
@@ -120,7 +78,7 @@ export function hitDetection(updateScore){
                     updateScore(enemy.score);
                     enemy.parentNode.removeChild(enemy);
                     bullet.parentNode.removeChild(bullet);
-                    enemyMaker();
+                    enemyMaker(new Enemy);
                     break;
                 }
             }

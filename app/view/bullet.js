@@ -23,9 +23,3 @@ export function moveBullets () {
     } 
 };
 
-export function clearBullets () {
-    const tempBullets = document.querySelectorAll('.bullet');
-    [...tempBullets].forEach(item => {
-        item.parentNode.removeChild(item);
-    });
-};

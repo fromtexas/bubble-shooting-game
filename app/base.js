@@ -7,3 +7,15 @@ export const elements = {
     score: document.querySelector('.score'),
     progressBar: document.querySelector('.progress__bar'),
 };
+
+
+export function randomMe (num){
+    return Math.floor(Math.random()*num);
+};
+
+export function clearDom (eleClass) {
+    const eles = document.querySelectorAll(eleClass);
+    [...eles].forEach(item => {
+        item.parentNode.removeChild(item);
+    });
+};
