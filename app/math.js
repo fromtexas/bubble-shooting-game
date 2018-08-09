@@ -1,7 +1,7 @@
 import {elements} from './base';
 import {bullet} from './view/bullet';
 
-const {box, gameContainer} = elements;
+const {gameContainer} = elements;
 
 export function isCollide(ele1, ele2){
     const ele1Rect = ele1.getBoundingClientRect();

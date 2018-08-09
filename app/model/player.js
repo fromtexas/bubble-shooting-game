@@ -11,6 +11,5 @@ export class Player {
 
     updateScore (score) {
         this.score += score;
-        //console.log(this.score);
     }
 }
