@@ -1,2 +1,2 @@
-import '../assets/styles/index.scss';
-import './controller';
+import "../assets/styles/index.scss";
+import "./controller";

@@ -1,9 +1,9 @@
 export class Round {
-    constructor () {
-        this.stage = 1;
-    }
+  constructor() {
+    this.stage = 1;
+  }
 
-    increaseRound () {
-        this.stage++
-    }
-};
+  increaseRound() {
+    this.stage++;
+  }
+}
